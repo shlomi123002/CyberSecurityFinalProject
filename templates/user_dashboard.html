@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Security Quiz</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='website1.css') }}">
+    <style>
+        .category-container {
+            margin: 20px 0;
+        }
+
+        .category {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .category input[type="checkbox"] {
+            margin-right: 10px;
+        }
+
+        .category label {
+            cursor: pointer;
+        }
+    </style>
+    <script>
+        function toggleAllCategories(selectAll) {
+            var checkboxes = document.querySelectorAll('.category input[type="checkbox"]');
+            checkboxes.forEach(function (checkbox) {
+                checkbox.checked = selectAll;
+            });
+        }
+
+        function collectSelectedCategories() {
+            var selectedCategories = [];
+            var checkboxes = document.querySelectorAll('.category input[type="checkbox"]:checked');
+            checkboxes.forEach(function (checkbox) {
+                selectedCategories.push(checkbox.value);
+            });
+            return selectedCategories;
+        }
+
+        function ChosenCategories() {
+            var selectedCategories = collectSelectedCategories();
+            if (selectedCategories.length === 0) {
+                alert('Please select at least one category before starting the game.');
+                return false; // Prevent form submission
+            }
+
+            // Add selected categories to a hidden input field
+            document.getElementById('selectedCategories').value = selectedCategories.join(',');
+
+            // Submit the form
+            document.getElementById('startGameForm').submit();
+        }
+    </script>
+</head>
+
+<body>
+    <div class="container">
+
+        <h1>Welcome, {{ username }}!!</h1>
+
+        <div class="button-row">
+            <a href="{{ url_for('user_summarise') }}">
+                <button class="button" type="button">User Games Summarise</button>
+            </a>
+            <a href="{{ url_for('logout') }}">
+                <button class="button" type="button">Logout</button>
+            </a>
+            <a href="{{ url_for('set_new_pwd') }}">
+                <button class="button" type="button">Change My Password</button>
+            </a>
+        </div>
+
+        <div class="category-container">
+            <h2>Select Game Categories</h2>
+            <div class="category-container">
+                <div class="category">
+                    <label for="broken_access_control">
+                        <div class="checkbox-wrapper-18">
+                            <div class="round">
+                                <input type="checkbox" id="broken_access_control" name="category"
+                                    value="Broken Access Control">
+                                <label for="broken_access_control"></label>
+                            </div>
+                            Broken Access Control
+                    </label>
+                </div>
+            </div>
+            <div class="category">
+                <label for="cryptographic_failures">
+                    <div class="checkbox-wrapper-18">
+                        <div class="round">
+                            <input type="checkbox" id="cryptographic_failures" name="category"
+                                value="Cryptographic Failures">
+                            <label for="cryptographic_failures"></label>
+                        </div>
+                        Cryptographic Failures
+                </label>
+            </div>
+        </div>
+        <div class="category">
+            <label for="injection">
+                <div class="checkbox-wrapper-18">
+                    <div class="round">
+                        <input type="checkbox" id="injection" name="category" value="Injection">
+                        <label for="injection"></label>
+                    </div>
+                    Injection
+            </label>
+        </div>
+    </div>
+    <div class="category">
+        <label for="insecure_design">
+            <div class="checkbox-wrapper-18">
+                <div class="round">
+                    <input type="checkbox" id="insecure_design" name="category" value="Insecure Design">
+                    <label for="insecure_design"></label>
+                </div>
+                Insecure Design
+        </label>
+    </div>
+    </div>
+    <div class="category">
+        <label for="security_misconfiguration">
+            <div class="checkbox-wrapper-18">
+                <div class="round">
+                    <input type="checkbox" id="security_misconfiguration" name="category"
+                        value="Security Misconfiguration">
+                    <label for="security_misconfiguration"></label>
+                </div>
+                Security Misconfiguration
+        </label>
+    </div>
+    </div>
+    <div class="category">
+        <label for="vulnerable_and_outdated_components">
+            <div class="checkbox-wrapper-18">
+                <div class="round">
+                    <input type="checkbox" id="vulnerable_and_outdated_components" name="category"
+                        value="Vulnerable and Outdated Components">
+                    <label for="vulnerable_and_outdated_components"></label>
+                </div>
+                Vulnerable and Outdated Components
+        </label>
+    </div>
+    </div>
+    <div class="category">
+        <label for="identification_and_authentication_failures">
+            <div class="checkbox-wrapper-18">
+                <div class="round">
+                    <input type="checkbox" id="identification_and_authentication_failures" name="category"
+                        value="Identification and Authentication Failures">
+                    <label for="identification_and_authentication_failures"></label>
+                </div>
+                Identification and Authentication Failures
+        </label>
+    </div>
+    </div>
+    <div class="category">
+        <label for="software_and_data_integrity_failures">
+            <div class="checkbox-wrapper-18">
+                <div class="round">
+                    <input type="checkbox" id="software_and_data_integrity_failures" name="category"
+                        value="Software and Data Integrity Failures">
+                    <label for="software_and_data_integrity_failures"></label>
+                </div>
+                Software and Data Integrity Failures
+        </label>
+    </div>
+    </div>
+    <div class="category">
+        <label for="security_logging_and_monitoring_failures">
+            <div class="checkbox-wrapper-18">
+                <div class="round">
+                    <input type="checkbox" id="security_logging_and_monitoring_failures" name="category"
+                        value="Security Logging and Monitoring Failures">
+                    <label for="security_logging_and_monitoring_failures"></label>
+                </div>
+                Security Logging and Monitoring Failures
+        </label>
+    </div>
+    </div>
+    <div class="category">
+        <label for="server_side_request_forgery">
+            <div class="checkbox-wrapper-18">
+                <div class="round">
+                    <input type="checkbox" id="server_side_request_forgery" name="category"
+                        value="Server Side Request Forgery">
+                    <label for="server_side_request_forgery"></label>
+                </div>
+                Server Side Request Forgery
+        </label>
+    </div>
+    </div>
+    <br></br>
+    <button class="button" onclick="toggleAllCategories(true)">Select All</button>
+    <button class="button" onclick="toggleAllCategories(false)">Deselect All</button>
+    </div>
+
+    <form id="startGameForm" action="{{ url_for('call_game') }}" method="post" onsubmit="return ChosenCategories();">
+        <input type="hidden" id="selectedCategories" name="selectedCategories" value="">
+        <button class="button" type="submit">Start Game</button>
+    </form>
+    </div>
+</body>
+
+</html>

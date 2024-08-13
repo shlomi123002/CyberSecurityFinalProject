@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Security Quiz Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='website1.css') }}">
+</head>
+
+<body>
+    <div class="container">
+        <h1>{{ username }}'s Dashboard</h1>
+
+        <a href="{{ url_for('logout') }}">
+            <button class="button" type="submit">Logout</button>
+        </a>
+        <br><br>
+
+        <a href="{{ url_for('user_dashboard', name=username) }}">
+            <button class="button" type="submit">Back to Homepage</button>
+        </a>
+        <br><br>
+
+        <h2>Your Summary</h2>
+        <p><strong>Your final scores (%):</strong> {{ user_scores }}</p>
+        <p><strong>Your average score:</strong> {{ user_avg_score }}%</p>
+        <p><strong>Your rank:</strong> {{ user_rank }}</p>
+
+        <h3>Your Scores Plot:</h3>
+        <img src="data:image/png;base64,{{ user_scores_plot }}" alt="User Scores Plot">
+
+        <h3>Average Scores Distribution:</h3>
+        <img src="data:image/png;base64,{{ avg_scores_plot }}" alt="Average Scores Plot">
+
+        {% if category_plots %}
+        <h3>Category Statistics:</h3>
+        {% for category, plot in category_plots %}
+        <h4>{{ category }}</h4>
+        <h5>Your Scores:</h5>
+        <img src="data:image/png;base64,{{ plot }}" alt="Your Scores in {{ category }}">
+        {% endfor %}
+        {% endif %}
+
+    </div>
+</body>
+
+</html>
